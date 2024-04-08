@@ -231,7 +231,6 @@ services:
     networks:
         - cluster_network
   
-  
   #DWH postgreSQL
   dwh_postgres:
     hostname: dwh_postgres_container
@@ -262,7 +261,7 @@ services:
   pgadmin:
     hostname: pgadmin_container
     container_name: pgadmin_container
-    build: ./PGADMIN
+    image: dpage/pgadmin4:5.7
     environment:
       PGADMIN_DEFAULT_EMAIL: "pgadmin@default.com"
       PGADMIN_DEFAULT_PASSWORD: "pgadminpswrd"
@@ -275,9 +274,6 @@ services:
     restart: always
     networks:
       - cluster_network
-
-
-
 
 networks:
   cluster_network:
