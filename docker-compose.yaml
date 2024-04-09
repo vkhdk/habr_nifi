@@ -167,6 +167,7 @@ services:
     hostname: myzookeeper
     container_name: zookeeper_container
     image: 'bitnami/zookeeper:3.7.0'
+    restart: always
     # to see crashes when debugging
     # restart: on-failure
     environment:
@@ -182,6 +183,7 @@ services:
     # restart: on-failure
     ports:
       - "18080:18080"
+    restart: always
     environment:
       - LOG_LEVEL=INFO
       - NIFI_REGISTRY_DB_DIR=/opt/nifi-registry/nifi-registry-current/database
@@ -202,6 +204,7 @@ services:
     # restart: on-failure
     ports:
       - '8091:8080'
+    restart: always
     environment:
       - NIFI_WEB_HTTP_PORT=8080
       - NIFI_CLUSTER_IS_NODE=true
