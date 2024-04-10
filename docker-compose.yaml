@@ -181,9 +181,9 @@ services:
     image: 'apache/nifi-registry:1.19.0'
     # to see crashes when debugging
     # restart: on-failure
+    restart: always
     ports:
       - "18080:18080"
-    restart: always
     environment:
       - LOG_LEVEL=INFO
       - NIFI_REGISTRY_DB_DIR=/opt/nifi-registry/nifi-registry-current/database
@@ -202,9 +202,9 @@ services:
     image: 'apache/nifi:1.19.0'
     # to see crashes when debugging
     # restart: on-failure
+    restart: always
     ports:
       - '8091:8080'
-    restart: always
     environment:
       - NIFI_WEB_HTTP_PORT=8080
       - NIFI_CLUSTER_IS_NODE=true
@@ -225,10 +225,10 @@ services:
       - ./NIFI/file_share/nifi/provenance_repository:/opt/nifi/nifi-current/provenance_repository
       - ./NIFI/file_share/nifi/state:/opt/nifi/nifi-current/state
       - ./NIFI/file_share/nifi/logs:/opt/nifi/nifi-current/logs
-      # GLOBAL_FILE_SHARE for sharing files between containers
-      - ./GLOBAL_FILE_SHARE/:/opt/nifi/nifi-current/external_files
+      # GLOBAL_SHARE for sharing files between containers
+      - ./GLOBAL_SHARE/FILES/:/opt/nifi/nifi-current/external_files
       # folder for Driver Location 
-      - ./NIFI/file_share/nifi/drivers:/opt/nifi/nifi-current/drivers
+      - ./GLOBAL_SHARE/NIFI/drivers/:/opt/nifi/nifi-current/drivers
       # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
       #- ./NIFI/file_share/nifi/conf:/opt/nifi/nifi-current/conf
     networks:
@@ -242,9 +242,9 @@ services:
     volumes:
       #path to file share
       - ./DWH/file_share/dwh_postgresql_data/:/var/lib/postgresql/data
-      - ./DWH/file_share/init:/docker-entrypoint-initdb.d
-      - ./DWH/file_share/dumps/:/var/lib/postgresql/dumps
-      - ./GLOBAL_FILE_SHARE/:/var/lib/postgresql/GLOBAL_FILE_SHARE
+      - ./GLOBAL_SHARE/DWH/init:/docker-entrypoint-initdb.d
+      - ./GLOBAL_SHARE/DWH/dumps/:/var/lib/postgresql/dumps
+      - ./GLOBAL_SHARE/FILES/:/var/lib/postgresql/GLOBAL_SHARE
     #set the DB name, user and password
     environment:
       POSTGRES_USER: 'dwh_postgres'
