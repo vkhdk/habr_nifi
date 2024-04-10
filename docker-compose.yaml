@@ -212,6 +212,7 @@ services:
       - NIFI_ZK_CONNECT_STRING=myzookeeper:2181
       - NIFI_ELECTION_MAX_WAIT=30 sec
       - NIFI_SENSITIVE_PROPS_KEY='12345678901234567890A'
+
     healthcheck:
       test: "${DOCKER_HEALTHCHECK_TEST:-curl localhost:8091/nifi/}"
       interval: "60s"
@@ -230,7 +231,7 @@ services:
       # folder for Driver Location 
       - ./GLOBAL_SHARE/NIFI/drivers/:/opt/nifi/nifi-current/drivers
       # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
-      #- ./NIFI/file_share/nifi/conf:/opt/nifi/nifi-current/conf
+      - ./GLOBAL_SHARE/NIFI/conf/:/opt/nifi/nifi-current/conf
     networks:
       - cluster_network
   

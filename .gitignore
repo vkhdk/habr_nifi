@@ -10,3 +10,4 @@ GLOBAL_SHARE/AIRFLOW/dags/__pycache__
 /AIRFLOW_DB/file_share/airflow_postgresql_data
 #Nifi
 /NIFI/file_share
+/GLOBAL_SHARE/NIFI/conf/archive
