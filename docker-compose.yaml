@@ -231,6 +231,7 @@ services:
       # folder for Driver Location 
       - ./GLOBAL_SHARE/NIFI/drivers/:/opt/nifi/nifi-current/drivers
       # uncomment the next line after copying the /conf directory from the container to your local directory to persist NiFi flows
+      # work only if you save conf folder from container to your local directory before
       - ./GLOBAL_SHARE/NIFI/conf/:/opt/nifi/nifi-current/conf
     networks:
       - cluster_network
